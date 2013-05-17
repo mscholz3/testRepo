@@ -1,7 +1,7 @@
 testRepo
 ========
 
-A Test Repository to learn how to use ant, git, github, jenkins, junit and eclipse.
+A Test Repository to learn how to use ant, git, github, jenkins, junit, mysql and eclipse.
 
 Ant
 ===
