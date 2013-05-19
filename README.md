@@ -1,7 +1,7 @@
 testRepo
 ========
 
-A Test Repository to learn how to use ant, git, github, jenkins, junit and eclipse.
+A Test Repository to learn how to use ant, git, github, jenkins, junit, mysql and eclipse.
 
 Ant
 ===
@@ -27,6 +27,11 @@ JUnit
 =====
 
 Learn how to build JUnit tests an execute them with jenkins after every successful push to github.
+
+MySql
+=====
+
+Learn how to receive data from the database with java.
 
 Eclipse
 =======
