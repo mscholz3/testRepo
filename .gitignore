@@ -1,6 +1,6 @@
 *.class
+*/distribution/*
 
 # Package Files #
-*.jar
 *.war
 *.ear
