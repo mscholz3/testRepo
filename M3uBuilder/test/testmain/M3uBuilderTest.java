@@ -1,21 +1,25 @@
 package testmain;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.TestCase;
 import main.M3uBuilder;
 
-public class M3uBuilderTest extends TestCase {
+import org.junit.Before;
+import org.junit.Test;
+
+public class M3uBuilderTest {
 	private M3uBuilder								m3uToTest;
 	private Set<String>								testEpisodes;
 	private Map<String, Set<String>>				testSeasons;
 	private Map<String, Map<String, Set<String>>>	testSeries;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() {
 		testEpisodes = new HashSet<>();
 		{
 			testEpisodes.add("Episode 1");
@@ -42,9 +46,9 @@ public class M3uBuilderTest extends TestCase {
 		}
 
 		m3uToTest = new M3uBuilder(testSeries);
-		super.setUp();
 	}
 
+	@Test
 	public void testM3uBuilder() {
 		final Set<String> seriesTest = m3uToTest.getSeries();
 		final Set<String> seasonsTest = m3uToTest.getSeasons("Firefly");
