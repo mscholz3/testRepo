@@ -1,0 +1,6 @@
+Testsuite: testmain.M3uBuilderTest
+Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0,004 sec
+
+Testcase: testGetSeasons took 0 sec
+Testcase: testGetEpisodes took 0 sec
+Testcase: testGetSeries took 0 sec

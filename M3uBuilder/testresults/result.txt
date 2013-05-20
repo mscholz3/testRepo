@@ -1,4 +1,0 @@
-Testsuite: testmain.M3uBuilderTest
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,028 sec
-
-Testcase: testM3uBuilder took 0,002 sec

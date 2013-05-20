@@ -31,14 +31,12 @@
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
 	<target name="compile" depends="clean, makedir">
-		<javac srcdir="${src.dir}"
-		       destdir="${build.dir}"
-		       includeantruntime="false">
+		<javac srcdir="${src.dir}" destdir="${build.dir}"
+			includeantruntime="false">
 		</javac>
-		<javac srcdir="${test.dir}"
-		       destdir="${build.dir}"
-		       includeantruntime="false"
-		       classpath="${libs.dir}/${junit}">
+
+		<javac srcdir="${test.dir}" destdir="${build.dir}"
+			includeantruntime="false" classpath="${libs.dir}/${junit}">
 		</javac>
 	</target>
 
@@ -51,22 +49,37 @@
 				<pathelement location="${libs.dir}/${hamcrest}" />
 			</classpath>
 
-			<test name="testmain.M3uBuilderTest"
-			      haltonfailure="yes"
-			      todir="${testout.dir}"
-			      outfile="result">
+			<batchtest haltonfailure="yes" todir="${testout.dir}">
+				<fileset dir="${test.dir}">
+					<include name="**/*Test*.java" />
+				</fileset>
+			</batchtest>
+			<formatter type="plain" />
+			<formatter type="xml" />
+
+			<!--
+			<test name="testmain.M3uBuilderTest" haltonfailure="yes"
+				todir="${testout.dir}" outfile="result">
+
 				<formatter type="plain" />
 				<formatter type="xml" />
 			</test>
+			<test name="testmain.DirectoryReaderTest" haltonfailure="yes"
+				todir="${testout.dir}" outfile="result">
+
+				<formatter type="plain" />
+				<formatter type="xml" />
+			</test>
+			-->
 		</junit>
 	</target>
 
 	<!-- Creates Javadoc -->
 	<target name="docs" depends="compile">
-		<javadoc packagenames="src"
-		         sourcepath="${src.dir}"
-		         destdir="${docs.dir}">
-			<!-- Define which files / directory should get included, we include all -->
+		<javadoc packagenames="src" sourcepath="${src.dir}"
+			destdir="${docs.dir}">
+
+			<!-- Define which files / directory should get included -->
 			<fileset dir="${src.dir}">
 				<include name="**" />
 			</fileset>

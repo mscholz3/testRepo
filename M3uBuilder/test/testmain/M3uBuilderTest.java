@@ -50,7 +50,7 @@ public class M3uBuilderTest {
 	}
 
 	@Test
-	public void getSeriesTest() {
+	public void testGetSeries() {
 		assertNull(new M3uBuilder(null).getSeries());
 		assertNull(new M3uBuilder(
 			new HashMap<String, Map<String, Set<String>>>()).getSeries());
@@ -60,14 +60,14 @@ public class M3uBuilderTest {
 	}
 
 	@Test
-	public void getSeasonsTest() {
+	public void testGetSeasons() {
 		final Set<String> seasonsTest = m3uToTest.getSeasons("Firefly");
 		assertEquals("Keysets of the seasons should be the same",
 			testSeasons.keySet(), seasonsTest);
 	}
 
 	@Test
-	public void getEpisodesTest() {
+	public void testGetEpisodes() {
 		final Set<String> episodesTest = m3uToTest.getEpisodes("Firefly",
 			"Season 1");
 		assertEquals("Sets of the episodes should be the same", testEpisodes,
