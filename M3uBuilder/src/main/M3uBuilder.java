@@ -12,7 +12,7 @@ public class M3uBuilder extends Object {
 	}
 
 	public Set<String> getSeries() {
-		if (series.isEmpty()) {
+		if (series == null || series.isEmpty()) {
 			return null;
 		}
 
@@ -20,7 +20,7 @@ public class M3uBuilder extends Object {
 	}
 
 	public Set<String> getSeasons(final String serie) {
-		if (series.isEmpty()) {
+		if (series == null || series.isEmpty()) {
 			return null;
 		}
 
@@ -33,7 +33,7 @@ public class M3uBuilder extends Object {
 	}
 
 	public Set<String> getEpisodes(final String serie, final String season) {
-		if (series.isEmpty()) {
+		if (series == null || series.isEmpty()) {
 			return null;
 		}
 

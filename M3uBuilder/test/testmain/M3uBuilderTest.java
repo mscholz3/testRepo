@@ -1,6 +1,7 @@
 package testmain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -50,6 +51,9 @@ public class M3uBuilderTest {
 
 	@Test
 	public void getSeriesTest() {
+		assertNull(new M3uBuilder(null).getSeries());
+		assertNull(new M3uBuilder(
+			new HashMap<String, Map<String, Set<String>>>()).getSeries());
 		final Set<String> seriesTest = m3uToTest.getSeries();
 		assertEquals("Keysets of the series should be the same",
 			testSeries.keySet(), seriesTest);
