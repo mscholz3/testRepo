@@ -2,17 +2,19 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7x86"/>
 	<classpathentry kind="lib" path="librarys/junit-4.11.jar" sourcepath="librarys/sources/junit-4.11-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/M3uBuilder/librarys/javadocs/junit-4.11-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="librarys/swt.jar" sourcepath="librarys/javadocs/src.zip"/>
+	<classpathentry kind="lib" path="librarys/swt.jar" sourcepath="librarys/sources/src.zip"/>
 	<classpathentry kind="lib" path="librarys/hamcrest-core-1.3.jar" sourcepath="librarys/sources/hamcrest-core-1.3-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/M3uBuilder/librarys/javadocs/hamcrest-core-1.3-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="librarys/org.eclipse.jface_3.8.101.v20120817-083647.jar"/>
+	<classpathentry kind="lib" path="librarys/org.eclipse.equinox.common_3.6.100.v20120522-1841.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
