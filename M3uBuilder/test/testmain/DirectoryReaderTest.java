@@ -10,17 +10,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DirectoryReaderTest {
-	private DirectoryReader	dirReaderToTest;
-
 	@Before
-	public void setUp() {
-		dirReaderToTest = new DirectoryReader();
-	}
+	public void setUp() {}
 
 	@Test
 	public void testCheckMainDirectory() throws Exception {
 		boolean result;
 
+		final DirectoryReader dirReaderToTest = new DirectoryReader(null);
 		// Needed to check private method:
 		final Method methodCheckMainDirectory = dirReaderToTest.getClass()
 			.getDeclaredMethod("checkMainDirectory", String.class);
@@ -31,23 +28,34 @@ public class DirectoryReaderTest {
 		// execute method
 		result = (boolean) methodCheckMainDirectory.invoke(dirReaderToTest,
 			"D:\\Ordner");
-
 		assertTrue("D:\\Ordner should be a valid input", result);
 
-		/*
-		 * Following String values should return false results. At least on
-		 * windows, if it gets rewritten for linux this test should be changed.
-		 */
-		final String stringsToTest[] = { "DD:\\Ordner", "Ordner", "D:Ordner",
-			"D\\Ordner", "D:/Ordner" };
-		for (final String stringToTest : stringsToTest) {
+		result = (boolean) methodCheckMainDirectory.invoke(dirReaderToTest,
+			(Object) null);
+		assertFalse("null should not be a valid input", result);
 
-			result = (boolean) methodCheckMainDirectory.invoke(dirReaderToTest,
-				stringToTest);
+		result = (boolean) methodCheckMainDirectory.invoke(dirReaderToTest, "");
+		assertFalse("\"\" should not be a valid input", result);
 
-			assertFalse(String.format("Testing: \"%s\" should have failed",
-				stringToTest), result);
-		}
+		// // Following String values should return false results. At least on
+		// // windows, if it gets rewritten for linux this test should be
+		// changed.
+		// final String stringsToTest[] = { "DD:\\Ordner", "Ordner", "D:Ordner",
+		// "D\\Ordner", "D:/Ordner" };
+		// for (final String stringToTest : stringsToTest) {
+		//
+		// result = (boolean) methodCheckMainDirectory.invoke(dirReaderToTest,
+		// stringToTest);
+		//
+		// assertFalse(String.format("Testing: \"%s\" should have failed",
+		// stringToTest), result);
+		// }
+	}
 
+	@Test
+	public void testListFoldersRecursive() {
+		// TODO: should create own testing folder structure
+		final DirectoryReader dirReaderToTest = new DirectoryReader("D:\\");
+		dirReaderToTest.listFoldersRecursive();
 	}
 }
