@@ -2,6 +2,8 @@ package io;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Reads the directory of a given path recursively and makes it available for
@@ -10,7 +12,8 @@ import java.io.IOException;
  * @author Micha
  */
 public class DirectoryReader {
-	private File	mainDir;
+	private File				mainDir;
+	private final List<String>	folderList;
 
 	/**
 	 * Constructor which sets the mainDirectory when he is initializing.
@@ -22,12 +25,13 @@ public class DirectoryReader {
 		if (checkMainDirectory(mainDirectory)) {
 			mainDir = new File(mainDirectory);
 		}
+		folderList = new ArrayList<String>();
 	}
 
 	/**
 	 * Checks if the inputed String has the right format. TODO: should check if
-	 * it runs on Linux or windows. shouldn't check for syntax, should get syntax
-	 * with input dialog.
+	 * it runs on Linux or windows. shouldn't check for syntax, should get
+	 * syntax with input dialog.
 	 */
 	private boolean checkMainDirectory(final String mainDirectory) {
 		if (mainDirectory == null || mainDirectory.equals("")) {
@@ -44,7 +48,9 @@ public class DirectoryReader {
 	 * @see #DirectoryReader(String mainDirectory)
 	 */
 	public void listFoldersRecursive() {
+		folderList.clear();
 		listFoldersRecursive(mainDir.listFiles());
+		System.out.println(folderList.toString());
 	}
 
 	/**
@@ -63,7 +69,7 @@ public class DirectoryReader {
 				try {
 					path = file.getCanonicalPath();
 					if (hasFiles(file)) {
-						System.out.println(path);
+						folderList.add(path);
 					}
 				}
 				catch (final IOException e) {

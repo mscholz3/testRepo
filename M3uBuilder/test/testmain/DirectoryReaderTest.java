@@ -2,16 +2,30 @@ package testmain;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static testmain.helpstructures.TestStructureProvider.getTestDirName;
 import io.DirectoryReader;
 
 import java.lang.reflect.Method;
 
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import testmain.helpstructures.TestStructureProvider;
+
 public class DirectoryReaderTest {
-	@Before
-	public void setUp() {}
+	private static TestStructureProvider	testStruc;
+
+	@BeforeClass
+	public static void setUpEnvironment() {
+		testStruc = new TestStructureProvider();
+		testStruc.makeVideoFolderStructure();
+	}
+
+	@AfterClass
+	public static void cleanUpEnvironment() {
+		new TestStructureProvider().deleteTestFolder();
+	}
 
 	@Test
 	public void testCheckMainDirectory() throws Exception {
@@ -54,9 +68,15 @@ public class DirectoryReaderTest {
 
 	@Test
 	public void testListFoldersRecursive() {
+		final DirectoryReader dirReaderToTest;
 		// TODO: should create own testing folder structure
-		//       test should work on Windows and Linux
-		final DirectoryReader dirReaderToTest = new DirectoryReader("/home/micha/");
+		// test should work on Windows and Linux
+		if (System.getProperty("os.name").matches("^Windows\\s.*$")) {
+			dirReaderToTest = new DirectoryReader(getTestDirName());
+		}
+		else {
+			dirReaderToTest = new DirectoryReader(getTestDirName());
+		}
 		dirReaderToTest.listFoldersRecursive();
 	}
 }

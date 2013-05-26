@@ -3,48 +3,30 @@ package testmain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
 import main.M3uBuilder;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import testmain.helpstructures.TestStructureProvider;
+
 public class M3uBuilderTest {
-	private M3uBuilder													m3uToTest;
-	private List<String>												testEpisodes;
-	private LinkedHashMap<String, List<String>>							testSeasons;
-	private LinkedHashMap<String, LinkedHashMap<String, List<String>>>	testSeries;
+	private static M3uBuilder													m3uToTest;
+	private static List<String>													testEpisodes;
+	private static LinkedHashMap<String, List<String>>							testSeasons;
+	private static LinkedHashMap<String, LinkedHashMap<String, List<String>>>	testSeries;
+	private static TestStructureProvider										testStrucProv;
 
-	@Before
-	public void setUp() {
-		testEpisodes = new ArrayList<>();
-		{
-			testEpisodes.add("Episode 1");
-			testEpisodes.add("Episode 2");
-			testEpisodes.add("Episode 3");
-			testEpisodes.add("Episode 4");
-			testEpisodes.add("Episode 5");
-		}
-
-		testSeasons = new LinkedHashMap<>();
-		{
-			testSeasons.put("Season 1", testEpisodes);
-			testSeasons.put("Season 2", testEpisodes);
-			testSeasons.put("Season 3", testEpisodes);
-		}
-
-		testSeries = new LinkedHashMap<>();
-		{
-			testSeries.put("Better Off Ted", testSeasons);
-			testSeries.put("Breaking Bad", testSeasons);
-			testSeries.put("Castle", testSeasons);
-			testSeries.put("Firefly", testSeasons);
-			testSeries.put("Futurama", testSeasons);
-		}
+	@BeforeClass
+	public static void setUpEnvironment() {
+		testStrucProv = new TestStructureProvider();
+		testEpisodes = testStrucProv.getEpisodes();
+		testSeasons = testStrucProv.getSeasons();
+		testSeries = testStrucProv.getSeries();
 
 		m3uToTest = new M3uBuilder(testSeries);
 	}

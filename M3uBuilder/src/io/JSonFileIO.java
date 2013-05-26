@@ -10,7 +10,7 @@ public class JSonFileIO {
 		gson = new GsonBuilder().setPrettyPrinting().create();
 	}
 
-	public void writeMapToJSon(final Object obj) {
+	public void writeToJSon(final Object obj) {
 		final String json = gson.toJson(obj);
 		System.out.println(json);
 	}
