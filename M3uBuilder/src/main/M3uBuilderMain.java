@@ -1,6 +1,6 @@
 package main;
 
-import gui.M3uBuilderMainWindow;
+import gui.M3uBuilderApplication;
 
 public class M3uBuilderMain {
 
@@ -8,7 +8,7 @@ public class M3uBuilderMain {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
-		new M3uBuilderMainWindow();
+		new M3uBuilderApplication();
 	}
 
 	public M3uBuilderMain() {}
