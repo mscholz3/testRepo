@@ -26,18 +26,13 @@ public class DirectoryReader {
 
 	/**
 	 * Checks if the inputed String has the right format. TODO: should check if
-	 * it runs on unix or windows. shouldn't check for syntax, should get syntax
+	 * it runs on Linux or windows. shouldn't check for syntax, should get syntax
 	 * with input dialog.
 	 */
 	private boolean checkMainDirectory(final String mainDirectory) {
 		if (mainDirectory == null || mainDirectory.equals("")) {
 			return false;
 		}
-
-		// TODO: shouldn't be done at all, the info should come from a selection
-		// if (!mainDirectory.matches("^\\w:\\\\.*$")) {
-		// return false;
-		// }
 
 		return true;
 	}

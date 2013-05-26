@@ -55,7 +55,8 @@ public class DirectoryReaderTest {
 	@Test
 	public void testListFoldersRecursive() {
 		// TODO: should create own testing folder structure
-		final DirectoryReader dirReaderToTest = new DirectoryReader("D:\\");
+		//       test should work on Windows and Linux
+		final DirectoryReader dirReaderToTest = new DirectoryReader("/home/micha/");
 		dirReaderToTest.listFoldersRecursive();
 	}
 }
