@@ -1,13 +1,14 @@
 package main;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Set;
 
 public class M3uBuilder extends Object {
-	Map<String, Map<String, Set<String>>>	series	= new HashMap<>();
+	LinkedHashMap<String, LinkedHashMap<String, List<String>>>	series	= new LinkedHashMap<>();
 
-	public M3uBuilder(final Map<String, Map<String, Set<String>>> series) {
+	public M3uBuilder(
+		final LinkedHashMap<String, LinkedHashMap<String, List<String>>> series) {
 		this.series = series;
 	}
 
@@ -28,11 +29,11 @@ public class M3uBuilder extends Object {
 			return null;
 		}
 
-		final Map<String, Set<String>> seasons = series.get(serie);
+		final LinkedHashMap<String, List<String>> seasons = series.get(serie);
 		return seasons.keySet();
 	}
 
-	public Set<String> getEpisodes(final String serie, final String season) {
+	public List<String> getEpisodes(final String serie, final String season) {
 		if (series == null || series.isEmpty()) {
 			return null;
 		}
@@ -41,7 +42,8 @@ public class M3uBuilder extends Object {
 			return null;
 		}
 
-		final Map<String, Set<String>> seasonsTemp = series.get(serie);
+		final LinkedHashMap<String, List<String>> seasonsTemp = series
+			.get(serie);
 
 		if (seasonsTemp.isEmpty()) {
 			return null;

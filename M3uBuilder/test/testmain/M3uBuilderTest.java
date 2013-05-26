@@ -3,9 +3,9 @@ package testmain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Set;
 
 import main.M3uBuilder;
@@ -14,14 +14,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class M3uBuilderTest {
-	private M3uBuilder								m3uToTest;
-	private Set<String>								testEpisodes;
-	private Map<String, Set<String>>				testSeasons;
-	private Map<String, Map<String, Set<String>>>	testSeries;
+	private M3uBuilder													m3uToTest;
+	private List<String>												testEpisodes;
+	private LinkedHashMap<String, List<String>>							testSeasons;
+	private LinkedHashMap<String, LinkedHashMap<String, List<String>>>	testSeries;
 
 	@Before
 	public void setUp() {
-		testEpisodes = new HashSet<>();
+		testEpisodes = new ArrayList<>();
 		{
 			testEpisodes.add("Episode 1");
 			testEpisodes.add("Episode 2");
@@ -30,14 +30,14 @@ public class M3uBuilderTest {
 			testEpisodes.add("Episode 5");
 		}
 
-		testSeasons = new HashMap<>();
+		testSeasons = new LinkedHashMap<>();
 		{
 			testSeasons.put("Season 1", testEpisodes);
 			testSeasons.put("Season 2", testEpisodes);
 			testSeasons.put("Season 3", testEpisodes);
 		}
 
-		testSeries = new HashMap<>();
+		testSeries = new LinkedHashMap<>();
 		{
 			testSeries.put("Better Off Ted", testSeasons);
 			testSeries.put("Breaking Bad", testSeasons);
@@ -53,7 +53,8 @@ public class M3uBuilderTest {
 	public void testGetSeries() {
 		assertNull(new M3uBuilder(null).getSeries());
 		assertNull(new M3uBuilder(
-			new HashMap<String, Map<String, Set<String>>>()).getSeries());
+			new LinkedHashMap<String, LinkedHashMap<String, List<String>>>())
+			.getSeries());
 		final Set<String> seriesTest = m3uToTest.getSeries();
 		assertEquals("Keysets of the series should be the same",
 			testSeries.keySet(), seriesTest);
@@ -68,7 +69,7 @@ public class M3uBuilderTest {
 
 	@Test
 	public void testGetEpisodes() {
-		final Set<String> episodesTest = m3uToTest.getEpisodes("Firefly",
+		final List<String> episodesTest = m3uToTest.getEpisodes("Firefly",
 			"Season 1");
 		assertEquals("Sets of the episodes should be the same", testEpisodes,
 			episodesTest);
