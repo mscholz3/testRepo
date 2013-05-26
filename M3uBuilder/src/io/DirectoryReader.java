@@ -35,9 +35,9 @@ public class DirectoryReader {
 		}
 
 		// TODO: shouldn't be done at all, the info should come from a selection
-		if (!mainDirectory.matches("^\\w:\\\\.*$")) {
-			return false;
-		}
+		// if (!mainDirectory.matches("^\\w:\\\\.*$")) {
+		// return false;
+		// }
 
 		return true;
 	}
