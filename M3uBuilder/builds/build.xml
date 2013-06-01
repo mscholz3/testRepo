@@ -76,7 +76,9 @@
 			<classpath>
 				<pathelement location="${build.dir}" />
 				<pathelement location="${libs.dir}/junit-4.11.jar" />
-				<pathelement location="${libs.dir}/hamcrest-core-1.3.jar" />
+				<fileset dir="${libs.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
 			</classpath>
 
 			<batchtest haltonfailure="yes" todir="${testout.dir}">
