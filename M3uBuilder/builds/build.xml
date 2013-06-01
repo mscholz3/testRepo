@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Sets the project name to M3uBuilder and the basedir to one above -->
-<project name="M3uBuilder" default="main" basedir="..">
+<project name="M3uBuilder"
+	default="main"
+	xmlns:flyway="antlib:com.googlecode.flyway.ant"
+	basedir="..">
+
 	<!-- Sets variables which can later be used. -->
 	<property name="src.dir" location="src" />
 	<property name="test.dir" location="test" />
@@ -8,9 +12,14 @@
 	<property name="dist.dir" location="distribution" />
 	<property name="libs.dir" location="librarys" />
 	<property name="testout.dir" location="testresults" />
-	<property name="junit" value="junit-4.11.jar" />
-	<property name="hamcrest" value="hamcrest-core-1.3.jar" />
 	<property name="docs.dir" location="javadoc" />
+
+	<!-- Sets classpath dependencies -->
+ 	<path id="classpath">
+		<fileset dir="${libs.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 
 	<!-- Deletes the existing build, docs and dist directory-->
 	<target name="clean">
@@ -28,27 +37,49 @@
 		<mkdir dir="${testout.dir}" />
 	</target>
 
-
 	<!-- Compiles the java code (including the usage of library for JUnit -->
 	<target name="compile" depends="clean, makedir">
 		<javac srcdir="${src.dir}" destdir="${build.dir}"
-			includeantruntime="false">
+			failonerror="true" includeantruntime="false">
+
+			<classpath refid="classpath" />
 		</javac>
 
 		<javac srcdir="${test.dir}" destdir="${build.dir}"
-			includeantruntime="false" classpath="${libs.dir}/${junit}">
+			failonerror="true" includeantruntime="false">
+
+			<classpath refid="classpath" />
 		</javac>
 	</target>
 
+	<!-- Integrate Flyway -->
+	<target name="migrate-db">
+		<taskdef uri="antlib:com.googlecode.flyway.ant"
+			resource="com/googlecode/flyway/ant/antlib.xml">
+			<classpath>
+				<pathelement location="${libs.dir}/flyway-core-2.1.1.jar"/>
+				<pathelement location="${libs.dir}/flyway-ant-2.1.1.jar"/>
+			</classpath>
+		</taskdef>
+
+		<path id="flyway.classpath">
+			<fileset dir="${libs.dir}" includes="mysql-connector-java-5.1.24-bin.jar"/>
+		</path>
+		<property name="flyway.locations" value="filesystem:../database"/>
+
+		<flyway:migrate url="jdbc:mysql://localhost:3306/filesystem" user="flyway"/>
+	</target>
+
 	<!-- Execute JUnit Test -->
-	<target name="junit" depends="clean, makedir, compile">
+	<target name="junit" depends="clean, makedir, compile, migrate-db">
 		<junit printsummary="yes" haltonfailure="yes">
 			<classpath>
 				<pathelement location="${build.dir}" />
-				<pathelement location="${libs.dir}/${junit}" />
-				<pathelement location="${libs.dir}/${hamcrest}" />
+				<pathelement location="${libs.dir}/junit-4.11.jar" />
+				<pathelement location="${libs.dir}/hamcrest-core-1.3" />
 			</classpath>
 
+			<!--
 			<batchtest haltonfailure="yes" todir="${testout.dir}">
 				<fileset dir="${test.dir}">
 					<include name="**/*Test*.java" />
@@ -56,8 +87,6 @@
 			</batchtest>
 			<formatter type="plain" />
 			<formatter type="xml" />
-
-			<!--
 			<test name="testmain.M3uBuilderTest" haltonfailure="yes"
 				todir="${testout.dir}" outfile="result">
 
@@ -79,6 +108,7 @@
 		<javadoc packagenames="src" sourcepath="${src.dir}"
 			destdir="${docs.dir}">
 
+			<classpath refid="classpath" />
 			<!-- Define which files / directory should get included -->
 			<fileset dir="${src.dir}">
 				<include name="**" />

@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import testmain.helpstructures.TestStructureProvider;
 
+
 public class M3uBuilderTest {
 	private static M3uBuilder													m3uToTest;
 	private static List<String>													testEpisodes;
