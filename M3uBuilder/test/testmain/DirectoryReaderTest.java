@@ -2,7 +2,7 @@ package testmain;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static testmain.helpstructures.TestStructureProvider.getTestDirName;
+import static testmain.helpstructures.StructureProvider.getTestDirName;
 import io.DirectoryReader;
 
 import java.lang.reflect.Method;
@@ -11,20 +11,20 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import testmain.helpstructures.TestStructureProvider;
+import testmain.helpstructures.StructureProvider;
 
 public class DirectoryReaderTest {
-	private static TestStructureProvider	testStruc;
+	private static StructureProvider	testStruc;
 
 	@BeforeClass
 	public static void setUpEnvironment() {
-		testStruc = new TestStructureProvider();
+		testStruc = new StructureProvider();
 		testStruc.makeVideoFolderStructure();
 	}
 
 	@AfterClass
 	public static void cleanUpEnvironment() {
-		new TestStructureProvider().deleteTestFolder();
+		new StructureProvider().deleteTestFolder();
 	}
 
 	@Test
@@ -50,20 +50,6 @@ public class DirectoryReaderTest {
 
 		result = (boolean) methodCheckMainDirectory.invoke(dirReaderToTest, "");
 		assertFalse("\"\" should not be a valid input", result);
-
-		// // Following String values should return false results. At least on
-		// // windows, if it gets rewritten for linux this test should be
-		// changed.
-		// final String stringsToTest[] = { "DD:\\Ordner", "Ordner", "D:Ordner",
-		// "D\\Ordner", "D:/Ordner" };
-		// for (final String stringToTest : stringsToTest) {
-		//
-		// result = (boolean) methodCheckMainDirectory.invoke(dirReaderToTest,
-		// stringToTest);
-		//
-		// assertFalse(String.format("Testing: \"%s\" should have failed",
-		// stringToTest), result);
-		// }
 	}
 
 	@Test

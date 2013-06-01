@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
-public class TestStructureProvider {
+public class StructureProvider {
 	private final List<String>													testEpisodesList;
 	private final List<String>													testSeasonsList;
 	private final List<String>													testSeriesList;
@@ -27,7 +27,7 @@ public class TestStructureProvider {
 		return testDirName;
 	}
 
-	public TestStructureProvider() {
+	public StructureProvider() {
 		rand = new Random();
 
 		testEpisodesList = new ArrayList<>();
@@ -135,7 +135,7 @@ public class TestStructureProvider {
 	}
 
 	public void makeFolderStructure() {
-		final TestStructureProvider testStrucProv = new TestStructureProvider();
+		final StructureProvider testStrucProv = new StructureProvider();
 		final String pathSeparator = System.getProperty("file.separator");
 
 		/* create own file structure to test */
@@ -154,7 +154,7 @@ public class TestStructureProvider {
 	}
 
 	public void makeVideoFolderStructure() {
-		final TestStructureProvider testStrucProv = new TestStructureProvider();
+		final StructureProvider testStrucProv = new StructureProvider();
 		final String pathSeparator = System.getProperty("file.separator");
 		FileWriter fileWriter;
 

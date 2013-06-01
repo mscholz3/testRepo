@@ -12,7 +12,7 @@ import main.M3uBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import testmain.helpstructures.TestStructureProvider;
+import testmain.helpstructures.StructureProvider;
 
 
 public class M3uBuilderTest {
@@ -20,11 +20,11 @@ public class M3uBuilderTest {
 	private static List<String>													testEpisodes;
 	private static LinkedHashMap<String, List<String>>							testSeasons;
 	private static LinkedHashMap<String, LinkedHashMap<String, List<String>>>	testSeries;
-	private static TestStructureProvider										testStrucProv;
+	private static StructureProvider										testStrucProv;
 
 	@BeforeClass
 	public static void setUpEnvironment() {
-		testStrucProv = new TestStructureProvider();
+		testStrucProv = new StructureProvider();
 		testEpisodes = testStrucProv.getEpisodes();
 		testSeasons = testStrucProv.getSeasons();
 		testSeries = testStrucProv.getSeries();

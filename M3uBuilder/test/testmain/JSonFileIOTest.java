@@ -1,35 +1,30 @@
 package testmain;
 
-import io.JSonFileIO;
-
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import testmain.helpstructures.TestStructureProvider;
-
+import testmain.helpstructures.StructureProvider;
 
 public class JSonFileIOTest {
-	private JSonFileIO															jsonWriterToTest;
-	private static LinkedHashMap<String, LinkedHashMap<String, List<String>>>	testSeries;
-	private static TestStructureProvider										testStrucProv;
+	// private JSonFileIO jsonWriterToTest;
+	// private static LinkedHashMap<String, LinkedHashMap<String, List<String>>>
+	// testSeries;
+	private static StructureProvider	testStrucProv;
 
 	@BeforeClass
 	public static void setUpEnvironment() {
-		testStrucProv = new TestStructureProvider();
-		testSeries = testStrucProv.getSeries();
+		testStrucProv = new StructureProvider();
+		// testSeries = testStrucProv.getSeries();
 	}
 
 	@Before
 	public void setUp() {
-		jsonWriterToTest = new JSonFileIO();
+		// jsonWriterToTest = new JSonFileIO();
 	}
 
 	@Test
 	public void testJSon() {
-		jsonWriterToTest.writeToJSon(testSeries);
+		// jsonWriterToTest.writeToJSon(testSeries);
 	}
 }
