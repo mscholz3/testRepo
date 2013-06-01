@@ -1,6 +1,7 @@
 *.class
 */distribution/*
 */bin/*
+*/testresults/*
 
 # Package Files #
 *.war
