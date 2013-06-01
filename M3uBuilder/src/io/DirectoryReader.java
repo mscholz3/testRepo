@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * Reads the directory of a given path recursively and makes it available for
  * other classes.
@@ -13,7 +16,7 @@ import java.util.List;
  */
 public class DirectoryReader {
 	private File				mainDir;
-	private final List<String>	folderList;
+	private final List<String>	folderList	= new ArrayList<>();
 
 	/**
 	 * Constructor which sets the mainDirectory when he is initializing.
@@ -25,7 +28,6 @@ public class DirectoryReader {
 		if (checkMainDirectory(mainDirectory)) {
 			mainDir = new File(mainDirectory);
 		}
-		folderList = new ArrayList<String>();
 	}
 
 	/**
@@ -125,21 +127,26 @@ public class DirectoryReader {
 		if (obj == null) {
 			return false;
 		}
-
-		if (obj.equals(this)) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj.getClass() != getClass()) {
 			return false;
 		}
 
-		if (!(obj instanceof DirectoryReader)) {
-			return false;
-		}
+		final DirectoryReader reader = (DirectoryReader) obj;
+		final EqualsBuilder builder = new EqualsBuilder();
+		builder.appendSuper(super.equals(obj));
+		builder.append(folderList, reader.folderList);
+		builder.append(mainDir, reader.mainDir);
+		return builder.isEquals();
+	}
 
-		final DirectoryReader dirReader = (DirectoryReader) obj;
-
-		if (!dirReader.mainDir.equals(mainDir)) {
-			return false;
-		}
-
-		return true;
+	@Override
+	public int hashCode() {
+		final HashCodeBuilder builder = new HashCodeBuilder(5, 87);
+		builder.append(folderList);
+		builder.append(mainDir);
+		return builder.toHashCode();
 	}
 }

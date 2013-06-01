@@ -28,13 +28,8 @@ public class M3uBuilderApplication {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				try {
-					final M3uBuilderApplication window = new M3uBuilderApplication();
-					window.frame.setVisible(true);
-				}
-				catch (final Exception e) {
-					e.printStackTrace();
-				}
+				final M3uBuilderApplication window = new M3uBuilderApplication();
+				window.frame.setVisible(true);
 			}
 		});
 	}
